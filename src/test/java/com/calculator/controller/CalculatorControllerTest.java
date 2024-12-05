@@ -53,5 +53,3 @@ class CalculatorControllerTest {
         Assertions.assertEquals(0d, result);
     }
 }
-
-//Generated with love by TestMe :) Please raise issues & feature requests at: https://weirddev.com/forum#!/testme
