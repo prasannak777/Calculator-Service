@@ -55,11 +55,11 @@ jobs:
 
       # Step 9: Debug Step - Verify Allure Report
       - name: Verify Allure Report
-        run: ls -R target/allure-report || echo "No allure report found"
+        run: ls -R target/site/allure-maven-plugin || echo "No allure report found"
 
       # Step 10: Upload Allure Report as Artifact
       - name: Upload Allure Report as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: allure-report
-          path: target/allure-report
+          path: target/site/allure-maven-plugin
