@@ -142,14 +142,15 @@
                     <execution>
                         <goals>
                             <goal>report</goal>
-                            <goal>serve</goal>
                         </goals>
                         <configuration>
                             <resultsDirectory>target/allure-results</resultsDirectory>
+                            <reportDirectory>target/allure-report</reportDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
