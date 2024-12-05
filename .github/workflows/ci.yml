@@ -1,4 +1,4 @@
-name: Java CI using Maven
+name: Java CI with Allure
 
 on:
   push:
@@ -34,20 +34,28 @@ jobs:
             ${{ runner.os }}-maven-
 
       # Step 4: Build and run test cases
-      - name: Build and Install
-        run: mvn clean install
+      - name: Build and Test
+        run: mvn clean test
 
-      # Step 5: Move Allure results to the target folder
-      - name: Move Allure Results
-        run: mv allure-results target/allure-results
+      # Step 5: Debug Step - List Test Results
+      - name: List Test Results
+        run: ls -R target/surefire-reports || echo "No surefire reports found"
 
-      # Step 6: Generate Allure Report
+      # Step 6: Debug Step - List Allure Results
+      - name: List Allure Results
+        run: ls -R allure-results || echo "No allure results found"
+
+      # Step 7: Generate Allure Report
       - name: Generate Allure Report
-        run: mvn allure:report
+        run: mvn allure:report -Dallure.results.directory=allure-results -Dallure.report.directory=target/allure-report
 
-      # Step 7: Upload Allure Report as Artifact
+      # Step 8: Debug Step - Verify Allure Report
+      - name: Verify Allure Report
+        run: ls -R target/allure-report || echo "No allure report found"
+
+      # Step 9: Upload Allure Report as Artifact
       - name: Upload Allure Report as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: allure-report
-          path: target/site/allure-maven-plugin
+          path: target/allure-report
