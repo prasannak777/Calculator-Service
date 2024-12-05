@@ -45,15 +45,19 @@ jobs:
       - name: List Allure Results
         run: ls -R allure-results || echo "No allure results found"
 
-      # Step 7: Generate Allure Report
+      # Step 7: Move Allure results to the target folder
+      - name: Move Allure Results
+        run: mv allure-results target/allure-results
+
+      # Step 8: Generate Allure Report
       - name: Generate Allure Report
         run: mvn allure:report -Dallure.results.directory=allure-results -Dallure.report.directory=target/allure-report
 
-      # Step 8: Debug Step - Verify Allure Report
+      # Step 9: Debug Step - Verify Allure Report
       - name: Verify Allure Report
         run: ls -R target/allure-report || echo "No allure report found"
 
-      # Step 9: Upload Allure Report as Artifact
+      # Step 10: Upload Allure Report as Artifact
       - name: Upload Allure Report as Artifact
         uses: actions/upload-artifact@v3
         with:
